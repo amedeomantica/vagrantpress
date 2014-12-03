@@ -4,3 +4,5 @@ latest.tar.gz
 ./wordpress/
 /wordpress/
 /wp-tests/
+.DS_Store
+_.DS_Store
