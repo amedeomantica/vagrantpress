@@ -36,13 +36,13 @@ The procedure for starting up a working WordPress is as follows:
 
 1. Clone the project.  (There’s only master branch.)
 2. Run the command `vagrant up`
-3. Open your browser to http://localhost:8080
+3. Open your browser to http://localhost:8080/site
 
 ## Working with the environment
 
 To log in to the local Wordpress installation:
 
-`http://localhost:8080/wp-admin/` the username is `admin`, the password is `vagrant`.
+`http://localhost:8080/site/wp-admin/` the username is `admin`, the password is `vagrant`.
 
 You can access phpMyAdmin:
 
