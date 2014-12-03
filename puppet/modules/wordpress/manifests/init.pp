@@ -13,20 +13,33 @@ class wordpress::install {
     command => '/usr/bin/mysql -u root -pvagrant --execute="GRANT ALL PRIVILEGES ON wordpress.* TO \'wordpress\'@\'localhost\' IDENTIFIED BY \'wordpress\'"',
   }
 
+  exec { 'create-wp-dir': #tee hee
+	command => '/bin/mkdir /vagrant/wordpress/',
+	creates => '/vagrant/wordpress/'
+  }
+
   # Get a new copy of the latest wordpress release
   # FILE TO DOWNLOAD: http://wordpress.org/latest.tar.gz
 
   exec { 'download-wordpress': #tee hee
+	cwd     => '/vagrant/wordpress/',
     command => '/usr/bin/wget http://wordpress.org/latest.tar.gz',
-    cwd     => '/vagrant/',
-    creates => '/vagrant/latest.tar.gz'
+    creates => '/vagrant/wordpress/latest.tar.gz',
+	require => Exec['create-wp-dir'],
   }
 
   exec { 'untar-wordpress':
-    cwd     => '/vagrant/',
-    command => '/bin/tar xzvf /vagrant/latest.tar.gz',
+    cwd     => '/vagrant/wordpress/',
+    command => '/bin/tar xzvf /vagrant/wordpress/latest.tar.gz',
     require => Exec['download-wordpress'],
-    creates => '/vagrant/wordpress',
+    creates => '/vagrant/wordpress/wordpress',
+  }
+
+  exec { 'rename-wordpress-dir':
+    cwd     => '/vagrant/wordpress/',
+    command => '/bin/mv wordpress site',
+    creates => '/vagrant/wordpress/site',
+	require => Exec['untar-wordpress']
   }
 
   # Import a MySQL database for a basic wordpress site.
@@ -40,7 +53,7 @@ class wordpress::install {
   }
 
   # Copy a working wp-config.php file for the vagrant setup.
-  file { '/vagrant/wordpress/wp-config.php':
+  file { '/vagrant/wordpress/site/wp-config.php':
     source => 'puppet:///modules/wordpress/wp-config.php'
   }
   
@@ -56,7 +69,7 @@ class wordpress::install {
   }
 
   # Copy a working wp-tests-config.php file for the vagrant setup.
-  file { '/vagrant/wordpress/wp-tests-config.php':
+  file { '/vagrant/wordpress/site/wp-tests-config.php':
     source  => 'puppet:///modules/wordpress/wp-tests-config.php',
 	require => Exec['untar-wordpress'],
   }
