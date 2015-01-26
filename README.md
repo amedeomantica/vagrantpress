@@ -11,18 +11,22 @@ I initially created this project to aid in developing child modules for a WordPr
 + Php
 + Phpmyadmin
 + Subversion
-+ PEAR
++ Git
++ Composer
++ ~~PEAR~~
 + Xdebug
-+ PHPUnit
-+ phploc
-+ phpcpd
-+ phpdcd
-+ phpcs
-+ phpdepend
-+ phpmd
-+ PHP_CodeBrowser
++ PHPUnit - **installed via composer*
++ phploc - **installed via composer*
++ phpcpd - **installed via composer*
++ phpdcd - **installed via composer*
++ phpcs - **installed via composer*
++ phpdepend - **installed via composer*
++ phpmd - **installed via composer*
++ PHP_CodeBrowser - **installed via composer*
 + WordPress sniffs for phpcs
-+ WordPress Unit Tests
++ WordPress Unit Tests - **installed via composer*
+
+**PEAR removed as support has reached end of life, see [End of Life for PEAR Installation Method](https://github.com/sebastianbergmann/phpunit/wiki/End-of-Life-for-PEAR-Installation-Method)*
 
 # Prerequisites
 
@@ -35,7 +39,7 @@ This is a fairly simple project to get up and running.
 The procedure for starting up a working WordPress is as follows:
 
 1. Clone the project.  (There’s only master branch.)
-2. Run the command `vagrant up`
+2. Run the command `vagrant up` from the directory
 3. Open your browser to http://localhost:8080
 
 ## Working with the environment
