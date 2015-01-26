@@ -68,9 +68,9 @@ class wordpress::install {
     command => '/usr/bin/mysql -u root -pvagrant --execute="GRANT ALL PRIVILEGES ON wp_tests.* TO \'wordpress\'@\'localhost\' IDENTIFIED BY \'wordpress\'"',
   }
 
-  # Copy a working wp-tests-config.php file for the vagrant setup.
-  file { '/vagrant/wordpress/site/wp-tests-config.php':
-    source  => 'puppet:///modules/wordpress/wp-tests-config.php',
-	require => Exec['untar-wordpress'],
-  }
+#  # Copy a working wp-tests-config.php file for the vagrant setup.
+#  file { '/vagrant/wordpress/site/wp-tests-config.php':
+#    source  => 'puppet:///modules/wordpress/wp-tests-config.php',
+#	require => Exec['rename-wordpress-dir'],
+#  }
 }
